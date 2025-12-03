@@ -3,10 +3,10 @@ pipeline {
     agent any
     environment {
         // docker image name
-        DOCKER_IMAGE_NAME="amitksunbeam/python-test-app"
+        DOCKER_IMAGE_NAME="avii9172951423/python-test-app"
 
         // docker user name
-        DOCKER_USER_NAME="amitksunbeam"
+        DOCKER_USER_NAME="avii9172951423"
     }
 
     stages {
@@ -34,12 +34,6 @@ pipeline {
                 sh 'echo $DOCKER_IMAGE_NAME'
                 sh 'echo $DOCKER_USER_NAME'
                 // sh 'docker image build -t ${DOCKER_IMAGE_NAME} .'
-            }
-        }
-
-        stage('docker login') {
-            steps {
-                // sh 'docker login -u '
             }
         }
     }
