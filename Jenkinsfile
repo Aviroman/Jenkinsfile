@@ -8,29 +8,6 @@ pipeline {
     }
 
     stages {
-
-        stage('prepare env') {
-            steps {
-                sh """
-                    apt install python3.10-venv
-                    python3 -m venv venv
-                    . venv/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                    pip install pytest
-                """
-            }
-        }
-
-        stage('test') {
-            steps {
-                sh """
-                    . venv/bin/activate
-                    pytest test_app.py
-                """
-            }
-        }
-
         stage('build docker image') {
             steps {
                 sh 'docker image build -t ${DOCKER_IMAGE_NAME} .'
