@@ -10,7 +10,7 @@ pipeline {
 
         stage('prepare the environment') {
             steps {
-                sh 'pip3 install --break-system-package -r requirements'
+                sh 'pip3 install -r requirements'
             }
         }
 
