@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('prepare env') {
+        stage('pytest') {
             steps {
                 // execute a shell command
                 sh 'pip3 install pytest'
