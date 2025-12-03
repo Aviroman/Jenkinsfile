@@ -19,14 +19,16 @@ pipeline {
         // }
 
         // install the required packages
-        stage('prepare env') 
-        {
+        stage('prepare env') {
+            steps {
             sh """python3 -m venv venv. 
             venv/bin/activate
             pip install -r requirements.txt
             pip install pytest
             """
+            }
         }
+        
 
         // test the application
         stage('test') {
