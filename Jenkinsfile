@@ -1,32 +1,63 @@
-
 pipeline {
     agent any
     environment {
         // docker image name
-        DOCKER_IMAGE_NAME="avii9172951423/python-test-app"
+        DOCKER_IMAGE_NAME="amitksunbeam/python-test-app"
 
         // docker user name
-        DOCKER_USER_NAME="avii9172951423"
+        DOCKER_USER_NAME="amitksunbeam"
+
+        // docker user auth token
+        DOCKER_AUTH_TOKEN=credentials('DOCKER_AUTH_TOKEN')
     }
 
     stages {
-        stage('scm') {
+        // stage('scm') {
+        //     steps {
+        //         echo "already taken care by Jenkins"
+        //     }
+        // }
+
+        // install the required packages
+        stage('prepare env') {
             steps {
-                echo "already taken care by Jenkins"
+                // execute a shell command
+                sh 'pip3 install --break-system-package -r requirements.txt '
             }
         }
-        
-        stage('test the application') {
+
+        // test the application
+        stage('test') {
             steps {
                 sh 'pytest test_app.py'
             }
         }
 
-        stage('prepare docker image') {
+        // build the docker image 
+        stage('build docker image') {
             steps {
-                sh 'echo $DOCKER_IMAGE_NAME'
-                sh 'echo $DOCKER_USER_NAME'
                 sh 'docker image build -t ${DOCKER_IMAGE_NAME} .'
+            }
+        }
+
+        // login to docker hub
+        stage('docker login') {
+            steps {
+                sh 'echo ${DOCKER_AUTH_TOKEN} | docker login -u ${DOCKER_USER_NAME} --password-stdin'
+            }
+        }
+
+        // push the docker image to docker hub
+        stage('push docker image') {
+            steps {
+                sh 'docker image push ${DOCKER_IMAGE_NAME}'
+            }
+        }
+
+        // restart the service
+        stage('restart service') {
+            steps {
+                sh 'docker service update --force --image ${DOCKER_IMAGE_NAME} python-app' 
             }
         }
     }
