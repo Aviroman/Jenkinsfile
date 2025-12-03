@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE_NAME="amitksunbeam/python-test-app"
-        DOCKER_USER_NAME="amitksunbeam"
+        DOCKER_IMAGE_NAME="avii9172951423/python-test-app"
+        DOCKER_USER_NAME="Aviroman"
         DOCKER_AUTH_TOKEN=credentials('DOCKER_AUTH_TOKEN')
     }
 
