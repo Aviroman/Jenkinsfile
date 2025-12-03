@@ -9,12 +9,6 @@ pipeline {
 
     stages {
 
-        stage('install venv package') {
-            steps {
-                sh 'sudo apt-get update && sudo apt-get install -y python3.10-venv'
-            }
-        }
-
         stage('prepare env') {
             steps {
                 sh """
