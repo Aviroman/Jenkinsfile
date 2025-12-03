@@ -26,6 +26,13 @@ pipeline {
             }
         }
 
+        stage('prepare env') {
+            steps {
+                // execute a shell command
+                sh 'pip3 install pytest'
+            }
+        }
+
         // test the application
         stage('test') {
             steps {
