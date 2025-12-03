@@ -21,10 +21,10 @@ pipeline {
         // install the required packages
         stage('venv') {
             steps {
-                sh 'apt install python3.10-venv'
+                sh 'sudo apt-get install python3.10-venv'
             }
         }
-        
+
         stage('prepare env') {
             steps {
             sh """python3 -m venv venv. 
