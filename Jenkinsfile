@@ -33,7 +33,7 @@ pipeline {
             steps {
                 sh 'echo $DOCKER_IMAGE_NAME'
                 sh 'echo $DOCKER_USER_NAME'
-                // sh 'docker image build -t ${DOCKER_IMAGE_NAME} .'
+                sh 'docker image build -t ${DOCKER_IMAGE_NAME} .'
             }
         }
     }
